@@ -1,0 +1,24 @@
+from odoo import models, fields
+
+
+class BonusType(models.Model):
+    _name = "employee.bonus.type"
+    _description = "Employee bonus Type"
+
+    name = fields.Char(string="Name")
+    description = fields.Text(string="Description")
+
+
+class Bonus(models.Model):
+    _name = "employee.bonus"
+    _description = "Employee bonus"
+
+    name = fields.Char(string="Name")
+    employee_id = fields.Many2one("hr.employee", string="Employee")
+    date = fields.Date(string="Date")
+    ttype = fields.Many2one('employee.bonus.type', string="نوع البونص")
+    amount = fields.Float(string="Amount")
+    description = fields.Text(string="Description")
+    company_id = fields.Many2one('res.company',
+                                 default=lambda self: self.employee_id.company_id)
+    currency_id = fields.Many2one('res.currency', string='Currency', related='company_id.currency_id')

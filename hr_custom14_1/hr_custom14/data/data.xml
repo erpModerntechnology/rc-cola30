@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="notification_cron_job" model="ir.cron">
+            <field name="name">Send notification to remind employee for checkin</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="state">code</field>
+            <field name="code">model.send_notification_to_checkin()</field>
+            <field name="interval_number">15</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+        </record>
+
+        <record id="activity_cron_job" model="ir.cron">
+            <field name="name">Send notification to remind employee contract renewal</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="state">code</field>
+            <field name="code">model.send_activity_to_renew_contract(15)</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+        </record>
+
+    </data>
+</odoo>

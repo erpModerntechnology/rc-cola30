@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_employee_form_inherits_training">
+            <field name="name">view.employee.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                    <button name="action_to_open_success_training"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-clock-o">
+                        <field name="success_course_count" widget="statinfo" string="الدورات المجتازة"/>
+                    </button>
+                </div>
+            </field>
+        </record>
+
+    </data>
+</odoo>

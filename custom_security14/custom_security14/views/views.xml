@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <record id="view_form_remove_edit" model="ir.ui.view">
+      <field name="name">view.form.remove.edit</field>
+      <field name="model">hr.employee</field>
+      <field name="inherit_id" ref="hr.view_employee_form"/>
+      <field name="groups_id" eval="[(6, 0, [ref('custom_security14.cant_edit_or_create')])]"/>
+      <field name="arch" type="xml">
+        <xpath expr="//form" position="attributes">
+          <attribute name="edit">false</attribute>
+          <attribute name="create">false</attribute>
+        </xpath>
+      </field>
+    </record>
+
+    <!-- Inherit tree View to Modify it hide create button -->
+    <record id="hide_create_button_tree_remove_edit" model="ir.ui.view">
+      <field name="name">hide.create.button.tree.remove.edit</field>
+      <field name="model">hr.employee</field>
+      <field name="inherit_id" ref="hr.view_employee_tree"/>
+      <field name="groups_id" eval="[(6, 0, [ref('custom_security14.cant_edit_or_create')])]"/>
+      <field name="arch" type="xml">
+        <xpath expr="/tree" position="attributes">
+          <attribute name="create">false</attribute>
+        </xpath>
+      </field>
+    </record>
+
+    <!-- Inherit  kanban View to Modify it hide create button -->
+    <record id="kanban_hide_create_button_kanban_remove_edit" model="ir.ui.view">
+      <field name="name">kanban_hide.create.button.kanban.remove.edit</field>
+      <field name="model">hr.employee</field>
+      <field name="inherit_id" ref="hr.hr_kanban_view_employees"/>
+      <field name="groups_id" eval="[(6, 0, [ref('custom_security14.cant_edit_or_create')])]"/>
+      <field name="arch" type="xml">
+        <xpath expr="/kanban" position="attributes">
+          <attribute name="create">false</attribute>
+        </xpath>
+      </field>
+    </record>
+
+  </data>
+</odoo>

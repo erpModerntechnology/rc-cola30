@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="modern_training_stage_program_tree_view" model="ir.ui.view">
+            <field name="name">modern.training.stage.tree.view</field>
+            <field name="model">training.stage</field>
+            <field name="arch" type="xml">
+                <tree string="HR Training">
+                    <field name="name"/>
+                    <field name="success_stage"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="modern_training_stage_program_form_view" model="ir.ui.view">
+            <field name="name">modern.training.stage.form.view</field>
+            <field name="model">training.stage</field>
+            <field name="arch" type="xml">
+                <form string="HR Training">
+                    <sheet>
+                        <div class="oe_title">
+                            <h2>
+                                <field name="name" placeholder="Name" required="1"/>
+                            </h2>
+                        </div>
+                        <group>
+                            <field name="success_stage"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="modern_action_training_stage"
+                model="ir.actions.act_window">
+            <field name="name"> Training Satges</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">training.stage</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!--        <menuitem id="modern_menu_training_stage" name="مراحل التدريب"-->
+<!--                  action="modern_action_training_stage"-->
+<!--                  parent="hr.menu_hr_root" groups="base.group_user"/>-->
+
+
+    </data>
+</odoo>

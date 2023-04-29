@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Inherit Form View to Modify it -->
+    <record id="hr_contract_view_form_inherited" model="ir.ui.view">
+        <field name="name">hr.contract.form.inherited</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='structure_type_id']" position="after">
+                <!-- Add your fields or attributes here -->
+                <field name="holiday_status_id"
+                       options="{'no_create_edit': True, 'no_create': True, 'no_open': True}" attrs="{'invisible':[('state','in',['close','cancel'])]}"/>
+
+                <field name="allocation_flag"
+                       invisible="1"/>
+
+                <field name="employee_annual_credit"
+                       attrs="{'required': [('holiday_status_id','!=',False)], 'invisible':[('state','in',['close','cancel'])]}"/>
+            </xpath>
+
+            <xpath expr="//header" position="inside">
+                <button name="create_leave_allocation" type="object" string="Create Allocations"
+                        class="oe_highlight"
+                        attrs="{'invisible':['|','|',('holiday_status_id','=',False),('allocation_flag','=',True),('state','in',['close','cancel'])]}" groups="hr.group_hr_user"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

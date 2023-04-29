@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+ <record model="ir.ui.view" id="modern_atttendance_move_wizarad">
+            <field name="name">modern.attendance.move.form</field>
+            <field name="model">modern.move.attendance.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                        <field name="emp_id"/>
+
+                    </group>
+                    <footer>
+                        <button name="move_attendance" string="Move Attendance" type="object" class="highlight"/>
+                        <button string="Close" class="btn-primary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    <record id="modern_move_attendance_action" model="ir.actions.act_window">
+            <field name="name">Move Attendance</field>
+            <field name="res_model">modern.move.attendance.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+
+
+
+
+<!--    <menuitem id="modern_move_attendance_menu" name="Move Attendance" parent="hr_attendance.menu_hr_attendance_manage_attendances" action="modern_move_attendance_action"/>-->
+
+
+
+    </data>
+</odoo>

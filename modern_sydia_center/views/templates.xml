@@ -1,0 +1,51 @@
+<odoo>
+    <data>
+        <template id="report_saydia_center">
+            <t t-foreach="docs" t-as="o">
+            <t t-call="web.basic_layout">
+                <div class="page">
+                    <h1 style="text-align:center;"> مركز السيدية التخصصي</h1>
+
+                    <div dir="rtl" class="row">
+                        <div style="padding-left:300px" class='col-6'><h1>
+                         صحتكم مسؤليتنا</h1>
+                        </div>
+
+                        <div class='col-6'>
+                        <span style="text-align:center;padding-left:400px"> الطوارئ</span>
+                        </div>
+                    </div>
+                    <div dir="rtl" class="row">
+                        <div style="padding-left:300px" class='col-4'>
+
+                        <span style="padding-left:100px">الاسم :<t t-esc="o.name"/></span>
+
+
+                        </div>
+
+                        <div class='col-4'>
+                            <span style="padding-left:100px">الاسم :<t t-esc="o.name"/></span>
+                        </div>
+                    </div>
+                </div>
+                </t>
+            </t>
+
+
+        </template>
+
+
+        <record id="report_saydia_center_report" model="ir.actions.report">
+            <field name="name">Modern Report</field>
+            <field name="model">sydia.center</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">modern_sydia_center.report_saydia_center</field>
+            <field name="report_file">modern_sydia_center.report_saydia_center</field>
+            <field name="print_report_name">(object.name or 'Appointment')</field>
+            <field name="binding_model_id" ref="model_sydia_center"/>
+            <field name="binding_type">report</field>
+        </record>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sydia_center,sydia_center.sydia_center,model_sydia_center,base.group_user,1,1,1,1
+access_saydia_line,saydia_line.saydia_line,model_saydia_line,base.group_user,1,1,1,1
+access_saydia_treatment,saydia_treatment.saydia_treatment,model_saydia_treatment,base.group_user,1,1,1,1

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="ir_cron_end_shift" model="ir.cron">
+            <field name="name">End Shift check</field>
+            <field eval="True" name="active"/>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field ref="model_hr_change_shift" name="model_id"/>
+            <field name="state">code</field>
+            <field eval="'model._check_end_date()'" name="code"/>
+        </record>
+
+
+    <record id="change_shift_view_form" model="ir.ui.view">
+        <field name="name">change_shift_view_form</field>
+        <field name="model">hr.change.shift</field>
+        <field name="arch" type="xml">
+            <form string="change_shift_form">
+                <header>
+                    <field name="company_id" invisible="1"/>
+                    <field name="employee_calendar_id" invisible="1"/>
+                    <field name="is_manager" invisible="1"/>
+                    <field name="can_confirm" invisible="1"/>
+                    <field name="can_validate" invisible="1"/>
+                    <button name="action_confirm" type="object" string="Confirm"
+                            class="oe_highlight" attrs="{'invisible':['|',('can_confirm','=',False),('state','!=','draft')]}"/>
+                    <button name="action_validate" type="object" string="Validate"
+                            class="oe_highlight" attrs="{'invisible':['|',('can_validate','=',False),('state','!=','confirm')]}"/>
+                    <button name="action_approved" type="object" string="Approve" class="oe_highlight"
+                            attrs="{'invisible': ['|', ('is_manager','=',False),('state', '!=', 'validate')]}"/>
+                    <button name="action_reject" type="object" string="Reject" class="oe_highlight"
+                            attrs="{'invisible': ['|', ('is_manager','=',False),('state', '!=', 'validate')]}"/>
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,validate,approve,reject"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                            <field name="employee_calendar_id" string="Current Shift" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                            <field name="resource_calendar_id" string="Change Shift to" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="end_shift_date"/>
+
+                        </group>
+                        <group>
+                            <field name="manager_id" readonly="0"/>
+                            <field name="request_date"/>
+
+                        </group>
+                    </group>
+
+                    <separator string="Reason Description"/>
+                    <field name="description"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="change_shift_view_tree" model="ir.ui.view">
+        <field name="name">change_shift_view_tree</field>
+        <field name="model">hr.change.shift</field>
+        <field name="arch" type="xml">
+            <tree string="change_shift_tree">
+                <field name="employee_id"/>
+                <field name="resource_calendar_id"/>
+                <field name="request_date" optional="show"/>
+
+                <field name="state" widget="badge" decoration-danger="state == 'reject'"
+                       decoration-muted="state == 'draft'" decoration-success="state == 'approve'"
+                       decoration-warning="state == 'confirm'" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="change_shift_search_view" model="ir.ui.view">
+        <field name="name">change_shift_search_view</field>
+        <field name="model">hr.change.shift</field>
+        <field name="arch" type="xml">
+            <search string="Change Shift">
+                <field name="employee_id"/>
+                <field name="state"/>
+                <field name="description"/>
+                <separator/>
+                <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                <filter string="Confirm" name="confirm" domain="[('state','=','confirm')]"/>
+                <filter string="Approve" name="approve" domain="[('state','=','approve')]"/>
+                <filter string="Reject" name="reject" domain="[('state','=','reject')]"/>
+
+                <group expand="1" string="Group By">
+                    <filter string="Employee" name="employee" context="{'group_by':'employee_id'}"/>
+                    <filter string="State" name="state" context="{'group_by':'state'}"/>
+                    <filter string="Request Date" name="request_date" context="{'group_by':'request_date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_change_shift" model="ir.actions.act_window">
+        <field name="name">Change Shift</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.change.shift</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="menu_item_hr_operation" name="Operation" parent="hr.menu_hr_root"
+              sequence="40"/>
+
+    <menuitem id="menu_item_change_shift" name="Shift Change Request"
+              parent="employee_shift_change.menu_item_hr_operation"
+              action="action_change_shift" sequence="1"/>
+</odoo>

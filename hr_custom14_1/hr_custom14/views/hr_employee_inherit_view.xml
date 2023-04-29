@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_employee_renew_view_form" model="ir.ui.view">
+        <field name="name">renew.hr.employee.view.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="renew_approve" string="Approve Renew Contract" type="object" attrs="{'invisible':['|',('renew','=',False),('renew_status','in',['refuse','approve'])]}" class="btn-primary"/>
+                <button name="renew_refuse" string="Refuse Renew Contract" type="object" attrs="{'invisible':['|',('renew','=',False),('renew_status','=','refuse')]}" class="btn-secondary"/>
+
+            </xpath>
+            <field name="parent_id" position="after">
+                    <field name="renew_status" invisible="0"/>
+                    <field name="renew" invisible="0"/>
+            </field>
+        </field>
+    </record>
+    </data>
+</odoo>

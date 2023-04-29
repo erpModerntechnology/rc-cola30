@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2015-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- "License URL : <https://store.webkul.com/license.html/>" -->
+
+<odoo>
+  <data>
+
+    <record id="hr_attendance_view_list" model="ir.ui.view">
+        <field name="name">inherit.hr.attendance.list.view</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+        <field name="arch" type="xml">
+          <field name="check_out" position="after">
+            <field name="geolocation_tracking" invisible="1" />
+            <button name="action_employee_check_in_out_location" string="Check In/Out Location" class="btn btn-primary" type="object" icon="fa-map-marker" attrs="{'invisible': [('geolocation_tracking', '=', False)]}"/>
+          </field>
+        </field>
+    </record>
+
+    <record id="hr_attendance_view_form" model="ir.ui.view">
+        <field name="name">inherit.hr.attendance.form.view</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+        <field name="arch" type="xml">
+          <field name="check_out" position="after">
+            <field name="geolocation_tracking" invisible="1" />
+            <button name="action_employee_check_in_out_location" string="Check In/Out Location" class="btn btn-primary" type="object" icon="fa-map-marker" attrs="{'invisible': [('geolocation_tracking', '=', False)]}"/>
+          </field>
+        </field>
+    </record>
+
+  </data>
+</odoo>

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_modern_attendance_summary_modern_attendance_summary,modern_attendance_summary.modern_attendance_summary,model_modern_hr_attendance,base.group_user,1,1,1,1
+access_modern_attendance,modern_attendance.modern_attendance,model_modern_move_attendance_wizard,base.group_user,1,1,1,1

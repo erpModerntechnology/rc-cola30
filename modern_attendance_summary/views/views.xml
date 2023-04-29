@@ -1,0 +1,72 @@
+<odoo>
+    <data>
+
+        <!--        <record forcecreate="True" id="cron_move_data" model="ir.cron">-->
+        <!--            <field name="name">Summary Data</field>-->
+        <!--            <field eval="True" name="active"/>-->
+        <!--            <field name="interval_number">10</field>-->
+        <!--            <field name="interval_type">minutes</field>-->
+        <!--            <field name="numbercall">-1</field>-->
+        <!--            <field name="model_id" ref="modern_attendance_summary.model_modern_hr_attendance"/>-->
+        <!--            <field name="state">code</field>-->
+        <!--            <field name="code">model.move_attendance()</field>-->
+        <!--        </record>-->
+        <record id="modern_attandance_view_tree" model="ir.ui.view">
+            <field name="name">modern_attandance_view_tree</field>
+            <field name="model">modern.hr.attendance</field>
+            <field name="arch" type="xml">
+                <tree string="modern_attandance_tree" decoration-danger="apsent == True"
+                      decoration-primary="holiday == True">
+                    <field name="emp_id"/>
+                    <field name="check_in"/>
+                    <field name="check_out"/>
+                    <field name="date"/>
+                    <field name="work_from"/>
+                    <field name="work_to"/>
+                    <field name="late_check_in"/>
+                    <field name="early_check_out"/>
+                    <field name="worked_hours" widget="float_time"/>
+
+                    <field name="holiday" invisible="1"/>
+                    <field name="apsent" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+        <record id="modern_attandance_view_form" model="ir.ui.view">
+            <field name="name">modern_attandance_view_form</field>
+            <field name="model">modern.hr.attendance</field>
+            <field name="arch" type="xml">
+                <form string="modern_attandance_form">
+                    <sheet>
+                        <group>
+                            <field name="emp_id"/>
+                            <field name="check_in"/>
+                            <field name="check_out"/>
+                            <field name="date"/>
+                            <field name="work_from"/>
+                            <field name="work_to"/>
+
+                            <field name="late_check_in"/>
+                            <field name="early_check_out"/>
+                            <field name="worked_hours"/>
+                            <field name="holiday" invisible="1"/>
+                            <field name="apsent" invisible="1"/>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="modern_attandance_action" model="ir.actions.act_window">
+            <field name="name">modern summary</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">modern.hr.attendance</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="modern_hr_attendance_categ" name="Modern Attendacne summaray "
+                  parent="hr_attendance.menu_hr_attendance_root"
+                  action="modern_attendance_summary.modern_attandance_action"/>
+    </data>
+</odoo>
