@@ -136,7 +136,8 @@ class HrLeave(models.Model):
                 print("holiday.date_from, holiday.date_to")
                 print(holiday.date_from, holiday.date_to)
                 holiday.date_from = holiday.date_from +timedelta(hours=2)
-                holiday.date_to = holiday.date_to +timedelta(hours=3)
+                if holiday.date_to:
+                    holiday.date_to = holiday.date_to +timedelta(hours=3)
                 print(holiday.date_from, holiday.date_to)
                 holiday.date_from = timezone(holiday.tz).localize(
                     datetime.combine(compensated_request_date_from, hour_from)).astimezone(UTC).replace(tzinfo=None)
