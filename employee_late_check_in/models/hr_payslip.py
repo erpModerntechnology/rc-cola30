@@ -47,7 +47,7 @@ class HrLeave(models.Model):
             if not holiday.request_date_from:
                 holiday.date_from = False
             elif not holiday.request_unit_half and not holiday.request_unit_hours and not holiday.request_date_to:
-                holiday.date_to = False
+                holiday.date_to = fields.datetime.now()
             else:
                 if holiday.request_unit_half or holiday.request_unit_hours:
                     holiday.request_date_to = holiday.request_date_from
